@@ -394,15 +394,15 @@ The system is a client-server application. Several people each run the Java desk
 
 ## 14. General and Layout
 
-> *Design reference: item 4 (desktop only).*
+> *Design reference: item 4 (web based application accessible on desktop and mobile devices).*
 
 | ID | Requirement |
 |----|-------------|
-| `GEN-1` | The client and the server shall each be implemented in Java. |
-| `GEN-2` | The client shall be a desktop application that runs on Windows, macOS, and Linux. |
-| `GEN-3` | The system shall provide no mobile application and no web browser interface. |
-| `GEN-4` | The client shall require a network connection to the server to display data and to make changes. |
-| `GEN-5` | The client shall provide a setting for the server's address on the Create Username screen and on the home screen. |
+| `GEN-1` | The servers should be implemented in Java. The client will be implemented using Javascript, HTML, and CSS. |
+| `GEN-2` | The client shall be a responsive web application that runs in modern web browsers on desktop computers, tablets, and mobile phones. |
+| `GEN-3` | Users shall access the application through a web browser. The system shall not require a separately installed desktop or native mobile application. |
+| `GEN-4` | The web client shall require an internet or network connection to communicate with the server, display shared data, and make changes. |
+| `GEN-5` | The web client shall connect to the application's configured server endpoint without requiring users to enter the server address. |
 | `GEN-6` | The client shall have three screens: the Create Username screen, the home screen, and the group screen. |
 | `GEN-7` | The group screen shall contain four areas: a header with the group name and group controls, the Members area, the Bills area with the bill details, and the Create Bill form. |
 | `GEN-8` | The group screen header shall contain the Back to Home, Leave Group, and Cancel All Bills buttons, and for the group owner also the Rename Group, Show Group Code, and Generate New Code controls. |
