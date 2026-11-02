@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="./CPEN LOGO.png" alt="Project Logo" width="200">
+</p>
+
+
+
 # IOU
 
 ## Team Members
@@ -9,6 +15,11 @@
 
 ## Mission Statement
 Making budgeting easier.
+
+## Team Roles 
+Project Manager - 
+Designer - 
+Developers - 
 
 ## Problem Statement
 People who live with roommates or share costs often have trouble keeping track of who paid what and how much each person should pay. Costs like groceries, rent and electricity might be paid by people and split in different ways. Some costs might only apply to one person while others are shared by everyone. Keeping track of all these things by hand can take a lot of time and can lead to confusion.
