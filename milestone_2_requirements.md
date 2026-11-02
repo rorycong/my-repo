@@ -389,23 +389,4 @@ The system is a client-server application. Several people each run the Java desk
 
 ---
 
-## Confirmed Design Decisions
-
-These were places where the design was silent or ambiguous. They have been confirmed, and the requirements above encode them.
-
-1. **One group code at a time.** The owner can regenerate the code; the old code then stops working (OWN-15, OWN-16).
-2. **Code remembered per device.** A user enters a group's code the first time on a device, and the client saves it (GRP-16, GRP-17).
-3. **Usernames and identity.** Users create their own username (3 to 20 letters, digits, or underscores, unique ignoring case, never changeable). With no passwords, the server gives the client a secret login token that proves it owns the username. Losing the local configuration file means losing the identity (USR-3 to USR-16).
-4. **Name inside a group.** A member's name in a group is separate from their username. The owner supplies it when adding the member, and members cannot rename themselves (MEM-1, MEM-5, MEM-13).
-5. **Weights.** Limited to two decimal places so they sum to exactly 1.00, with a Split Equally button that hands leftover hundredths to the earliest members. Leftover cents in a share follow member list order (BIL-14 to BIL-19, SPL-3).
-6. **Changes from the earlier expense design.** Net running balances, the minimum-payments Settle Up screen, and expense deletion are replaced by per-bill confirmation. The "owes / is owed" summary stays (section 11).
-7. **Cancelling bills.** The bill owner can cancel their own bill, and the group owner can cancel any single bill or all bills (section 10). Cancelling removes a bill completely, even when some of its shares were already confirmed as paid. A Paid share still cannot be changed back to Unpaid (PAY-12).
-8. **Leaving has no restrictions.** A member can leave while owing money. Their unpaid shares stay on the bills, labeled "(left)" (MEM-20 to MEM-26).
-9. **Bills of a member who left.** The group owner can confirm payments on them and cancel them (MEM-27, CAN-24).
-10. **Last member leaves.** The group is deleted (MEM-28).
-11. **Names.** Unique among current members only, compared case-insensitively. A name can be reused after its holder leaves, and former members' names carry "(left)" on old bills (MEM-11, MEM-25).
-12. **Seniority.** "Most senior remaining member" means the one earliest in member list order (OWN-19).
-13. **Suggested date.** Must not be in the past when set, and has no automatic effect, such as "overdue" marking (DAT-4, DAT-10).
-14. **Owner cannot remove members.** Members leave only by their own action (MEM-31).
-15. **Client-server with polling.** Multiple people on separate computers need a server. The client polls every 5 seconds and is read-only while offline (section 12).
 
