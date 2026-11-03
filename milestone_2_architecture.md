@@ -418,5 +418,5 @@ The server has no views. All views below reside only on the client. Every view o
   - The **UsernameController**, **HomeController**, **GroupAdminController**, **BillActionController**, and **AppController** can ask it to `show(message)`.
   - It sends no messages.
  
-##For code stubs, please go to component_stubs.md
+## For code stubs, please go to component_stubs.md
 
