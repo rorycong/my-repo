@@ -1,6 +1,6 @@
 # IOU: Requirements
 
-The system is a client-server application. Several people each run the Java desktop client on their own computer; a server holds the shared data. Each person creates their own unique username. People belong to groups. A group has a group owner and a group code. Inside a group, any member can create a bill; the member who creates a bill is its bill owner and confirms when other members have paid their shares.
+The system is a client-server application. Users run the web based client on their own devices; a server holds the shared data. Each person creates their own unique username. People belong to groups. A group has a group owner and a group code. Inside a group, any member can create a bill; the member who creates a bill is its bill owner and confirms when other members have paid their shares.
 
 ## Table of Contents
 
