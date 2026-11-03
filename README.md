@@ -46,4 +46,7 @@ Settle up screen. Tapping the settle up button opens a second screen that lists 
 
 The app saves the group, expenses, and payments to a local file when any change is made and loads them when the app starts, so nothing is lost when the app closes. A reset button on the main screen clears the entire history, after asking the user to confirm.
 
+Here is an abstract visualization of the platform:
 
+<img width="522" height="839" alt="IMG_0047" src="https://github.com/user-attachments/assets/6792658d-8362-4bfc-9c23-b168b0caf837" />
+<img width="522" height="839" alt="IMG_0048" src="https://github.com/user-attachments/assets/16879be7-1e47-4a80-9f08-0b78531e0829" />
