@@ -20,7 +20,7 @@ These are used by both the client and the server.
   - The **SessionModel** (client) stores the username and token and hands them out as Credentials.
   - The **ServerConnection** (client) sends Credentials with every request except `createUser`.
   - The **AuthGuard** (server) reads Credentials to authenticate each request.
-  - The **UserApiController** (server) returns Credentials in the `Result` of `createUser`. That is the only response that ever contains a login token (USR-15).
+  - The **UserApiController** (server) returns Credentials in the `Result` of `createUser`. That is the only response that ever contains a login token.
 
 ### GroupAccess
 - This component is a model (message data) bundling what the server needs to authorize a request about one group: the caller's Credentials, the `groupId`, and the group code the caller supplies.
@@ -32,7 +32,7 @@ These are used by both the client and the server.
 - It resides on both the client and the server.
 - It does not initiate communication:
   - Every server controller returns a Result.
-  - The **ServerConnection** (client) returns the server's Result to its caller. If the network fails or the response is malformed, it returns a failed Result itself instead of throwing (GEN-12).
+  - The **ServerConnection** (client) returns the server's Result to its caller. If the network fails or the response is malformed, it returns a failed Result itself instead of throwing.
   - The client controllers read the flag, display the failure reason through the **ErrorMessageView**, and compare it with the constants in **FailureReasons**.
 
 ### NewBill
@@ -182,7 +182,7 @@ These are used by both the client and the server.
   - The **GroupView**, **MemberListView**, **BillListView**, and **BillDetailsView** read the snapshot, the selected bill, and the permission answers, and are notified when it changes.
 
 ### ConnectionModel
-- This component is a model that stores whether the server can currently be reached and the latest connection error (SYN-7 to SYN-11). It starts as connected.
+- This component is a model that stores whether the server can currently be reached and the latest connection error. It starts as connected.
 - It resides only on the client.
 - It communicates with these components:
   - The **ServerConnection** can tell it `markConnected()` after any request that got a response, and `markDisconnected(message)` after one that failed or timed out.
@@ -242,7 +242,7 @@ The server controllers answer requests from the client's **ServerConnection**. O
   - `listGroups(credentials)`: asks the **AuthGuard** to authenticate, then asks the **GroupRepository** for the user's groups; returns a list of `GroupSummary`.
   - `createGroup(credentials, groupName, memberName)`: authenticates; asks **InputValidator** to check both names; asks the **GroupCodeGenerator** for a code and the **GroupRepository** whether it exists, repeating until it is unused; asks the GroupRepository to create the group with the caller as first member and owner; returns a `GroupSnapshot` including the code.
   - `joinGroup(credentials, groupCode, memberName)`: authenticates; validates the name; asks the **GroupRepository** to load the group by that code; locks the group; reloads it and fails if the caller is already a current member or the name matches a current member's ignoring case; asks the GroupRepository to add the member; unlocks; returns a `GroupSnapshot`.
-  - `getGroup(groupAccess)`: asks the **AuthGuard** to authorize group access; builds a `GroupSnapshot` from the Group, including the group code only if the caller is the owner (OWN-9). This one operation both opens a group and refreshes it.
+  - `getGroup(groupAccess)`: asks the **AuthGuard** to authorize group access; builds a `GroupSnapshot` from the Group, including the group code only if the caller is the owner. This one operation both opens a group and refreshes it.
   - `renameGroup(groupAccess, newName)`: authorizes; asks the AuthGuard to require the owner; validates the name; locks; asks the GroupRepository to rename; unlocks.
   - `generateNewCode(groupAccess)`: authorizes; requires the owner; locks; asks the **GroupCodeGenerator** for codes until the **GroupRepository** says one is unused; asks the GroupRepository to replace the code; unlocks; returns the new code.
   - `leaveGroup(groupAccess)`: authorizes; locks; if the caller is the last current member asks the GroupRepository to delete the group; otherwise, if the caller is the owner, picks the earliest remaining current member as the new owner, and asks the GroupRepository to record the leave and the new owner in one transaction; unlocks.
@@ -294,9 +294,9 @@ The server controllers answer requests from the client's **ServerConnection**. O
 - It resides only on the client.
 - It communicates with these components:
   - The **CreateGroupView** sends it `createGroupRequested(groupName, memberName)`. The **JoinGroupView** sends it `joinGroupRequested(groupCode, memberName)`. The **HomeView** sends it `groupSelected(groupId, groupName)` and `serverAddressChanged(address)`. The **GroupCodePromptView** sends it `groupCodeEntered(groupId, groupCode)`.
-  - For create and join it asks the **ServerConnection** to send `createGroup` or `joinGroup`. On success it asks the **GroupModel** to store the returned snapshot, asks the **SessionModel** to `saveGroupCode(groupId, code)` (the snapshot's code when creating, the typed code when joining), and tells the **AppController** to show the group screen (MEM-16). On failure it asks the **ErrorMessageView** to show the reason.
-  - For `groupSelected` it asks the **SessionModel** for a saved code. If there is one it asks the ServerConnection to send `getGroup(groupId, savedCode)`; if not it asks the **GroupCodePromptView** to show (GRP-13, GRP-17).
-  - For `groupCodeEntered` it asks the ServerConnection to send `getGroup(groupId, enteredCode)`. On success it asks the SessionModel to save the code, the GroupModel to store the snapshot, and the AppController to show the group screen. On failure it shows the reason and saves nothing (GRP-15).
+  - For create and join it asks the **ServerConnection** to send `createGroup` or `joinGroup`. On success it asks the **GroupModel** to store the returned snapshot, asks the **SessionModel** to `saveGroupCode(groupId, code)` (the snapshot's code when creating, the typed code when joining), and tells the **AppController** to show the group screen. On failure it asks the **ErrorMessageView** to show the reason.
+  - For `groupSelected` it asks the **SessionModel** for a saved code. If there is one it asks the ServerConnection to send `getGroup(groupId, savedCode)`; if not it asks the **GroupCodePromptView** to show.
+  - For `groupCodeEntered` it asks the ServerConnection to send `getGroup(groupId, enteredCode)`. On success it asks the SessionModel to save the code, the GroupModel to store the snapshot, and the AppController to show the group screen. On failure it shows the reason and saves nothing.
   - For `serverAddressChanged` it asks the SessionModel to `setServerAddress(address)`.
 
 ### GroupAdminController
@@ -334,13 +334,12 @@ The server controllers answer requests from the client's **ServerConnection**. O
 
 # Views
 
-The server has no views. All views below reside only on the client. Every view only displays data and forwards user actions; none changes a model or talks to the server directly. The user-interface toolkit (Swing or JavaFX) is chosen when the views are implemented; the stubs are toolkit-neutral.
-
+The server has no views. All views below reside only on the client. Every view only displays data and forwards user actions; none changes a model or talks to the server directly. 
 ### UsernameView
 - This component is a view that shows the Create Username screen: username field, server address field, and Create button, plus an optional notice.
 - It communicates with these components:
   - It sends the **UsernameController** `createUsernameRequested(username, serverAddress)` when the user presses Create.
-  - It reads the saved server address from the **SessionModel** and the connection status from the **ConnectionModel** to enable Create only when the username is valid and the connection is up (USR-8); it uses **InputValidator** to check the username.
+  - It reads the saved server address from the **SessionModel** and the connection status from the **ConnectionModel** to enable Create only when the username is valid and the connection is up; it uses **InputValidator** to check the username.
   - The **AppController** shows and hides it.
 
 ### HomeView
