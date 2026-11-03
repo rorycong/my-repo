@@ -79,7 +79,7 @@ These are used by both the client and the server.
   - The **UserApiController**, **GroupApiController**, and **BillApiController** (server) ask it to validate the same input again.
   - Each call returns a `Result` carrying the parsed value or a user-facing reason.
 
-### Formattin
+### Formatting
 - This component is a model (stateless rules) that turns values into display text: dollars from cents (`$12.50`, `-$12.50`), weights as `0.25`, and dates as `yyyy-mm-dd` or "No date".
 - It resides on both sides but is used only by client views.
 - Its methods are `formatCents`, `formatWeight`, and `formatDateOrNone`. Callers ask it directly; it communicates with nobody. The **MemberListView**, **BillListView**, and **BillDetailsView** ask it to format amounts, weights, and dates.
@@ -417,4 +417,6 @@ The server has no views. All views below reside only on the client. Every view o
 - It communicates with these components:
   - The **UsernameController**, **HomeController**, **GroupAdminController**, **BillActionController**, and **AppController** can ask it to `show(message)`.
   - It sends no messages.
+ 
+##For code stubs, please go to component_stubs.md
 
