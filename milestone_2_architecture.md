@@ -4,16 +4,7 @@
 
 ## Overview
 
-The system uses a **client-server** architecture. Each roommate runs the **client** (Java desktop app). Its views display data and forward user actions to client controllers. Client controllers change client models and talk to the server through one component, `ServerConnection`. A single **server** (Java) holds all data in a database. It has **no views**: its controllers answer requests with data, and its models read and write the database. The only things that cross the network are requests (an operation name plus its arguments) and a `Result` answer. The only description of a group that crosses the network is a `GroupSnapshot`.
-
-
-**Conventions used below**
-- All money is integer cents; all weights are integer hundredths (0 to 100).
-- Members are identified to other members by their **name in the group**. Usernames are never sent to other clients.
-- Groups are identified by a server-assigned `groupId`. A group's **code** is a separate secret, and every request about a group carries the caller's credentials, the `groupId`, and the code (GRP-18).
-- Every server operation returns a `Result` (success flag, failure reason, optional payload). A few failure reasons are fixed constants the client reacts to (`FailureReasons`); all others are shown to the user as written.
-- Client models notify their listeners (views and other models) when they change. **Views never change models directly.** They send user events to a controller, and the controller changes the models.
-- A "refresh" means the `SyncController` fetches current data from the server and stores it in the models.
+The system uses a **client-server** architecture. Each roommate runs the **client** (web based interface). Its views display data and forward user actions to client controllers. Client controllers change client models and talk to the server through one component, ServerConnection. A single **server** (Java) holds all data in a database. It has **no views**: its controllers answer requests with data, and its models read and write the database. The only things that cross the network are requests (an operation name plus its arguments) and a Result answer. The only description of a group that crosses the network is a GroupSnapshot.
 
 
 # Models
