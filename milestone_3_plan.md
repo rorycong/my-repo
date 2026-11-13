@@ -29,7 +29,7 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 - **Alternatives:** Zoom, Google Meet, Discord, meeting in person.
 - **Why Instagram calls are the best choice:** They start directly from our group chat, so there are no links or schedules to set up. When we need to walk through code and share a screen, we will use Zoom or Discord, which handle screen sharing better.
 ## Who will own component in your architecture?
-## 3. Who owns each component?
+
 
 Each component has exactly one owner. Owning a component means being responsible for writing it and making sure it is functional and correct.
 | Component | Layer | Where it runs | Owner |
