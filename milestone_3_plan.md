@@ -9,7 +9,7 @@ Our project manager, Garvit Bhasin, coordinates the work. He keeps track of what
 ### Will we have meetings? How frequently? Who plans the agenda?
 We will have a team meeting once a week, typically on Wednesdays, to review progress and plan the week ahead. Garvit plans the agenda and shares it in the group chat at least a day before the meeting. Teammates can add items to the agenda before then. A typical agenda covers what was finished since the last meeting, what is blocked, what each person will do this week, and any decisions the team needs to make. Meeting notes and action items are written in a shared Google Doc.
 ## What tools will you use to communicate?
-## 2. Communication Tools
+
 
 ### Team chat: Instagram group chat
 - **Alternatives:** Discord, Slack, Microsoft Teams, WhatsApp, email.
