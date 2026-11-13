@@ -31,4 +31,20 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 ## Who will own component in your architecture?
 ## What is your timeline?
 Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints. Our own target dates are set a day or more before each course deadline to leave time for review.
+
+## 4. What is our timeline?
+
+Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints.
+
+| Deadline | Milestone / Goal |
+|----------|------------------|
+| Fri, Nov 13 | **Milestone 3: Plan** submitted on the `milestone-3` branch |
+| Sun, Nov 15 | Tasks created as GitHub Issues and assigned to teammates |
+| Fri, Nov 20 | Server and shared code complete |
+| Sun, Nov 22 | Client complete and connected to the server (all features working end to end) |
+| Tue, Nov 24 | Testing against our requirements finished and bugs logged |
+| Thu, Nov 26 | Bugs fixed and a final full test done, so we are ready to submit a day early |
+| Fri, Nov 27 | **Milestone 4: Release** submitted |
+
+If we fall behind, we cut the least essential features rather than miss a deadline, since late submissions receive a 0.
 ## How will you verify you met your requirements?
