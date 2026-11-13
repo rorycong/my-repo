@@ -3,7 +3,10 @@
 ### Who will coordinate the work?
 Our project manager, Garvit Bhasin, coordinates the work. He keeps track of what needs to be done, who is responsible for each piece, and when it is due, and he follows up with teammates when something is falling behind.
 
-### What will our project management practices be? STILL NEED TO DO THIS 
+### What will our project management practices be? 
+- Tasks: Every task is a GitHub Issue with one assignee, a due date, and the requirement IDs in its title. Garvit tracks them on a simple board (To do / In progress / Done).
+- Code: One branch per issue, merged through a pull request that a teammate reviews and that passes the tests.
+- Check-ins: Garvit checks in on the group chat at each internal deadline (Nov 20, 22, 24). Anyone who is blocked says so within 24 hours.
 
 
 ### Will we have meetings? How frequently? Who plans the agenda?
