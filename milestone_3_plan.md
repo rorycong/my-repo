@@ -28,10 +28,9 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 - **Why Google Docs is the best choice:** It is free, needs no install, and lets several people edit the same document at once with live cursors, comments, and suggested edits. Version history lets us undo mistakes. Word with OneDrive can do the same but is slower to set up for everyone, and Markdown files in GitHub are better for the course deliverables than for quick drafts and notes that teammates want to comment on.
 - **Trade-off and mitigation:** Final versions of the course deliverables (such as the requirements and architecture) must end up in the GitHub repository. We will copy them there once the team agrees on them, so GitHub stays the source of truth.
 
-### Meetings and screen sharing: Instagram video calls (Zoom or Discord as backup)
-- **Alternatives:** Zoom, Google Meet, Discord, meeting in person.
-- **Why Instagram calls are the best choice:** They start directly from our group chat, so there are no links or schedules to set up. When we need to walk through code and share a screen, we will use Zoom or Discord, which handle screen sharing better.
-## Who will own component in your architecture?
+### Meetings and screen sharing: Discord
+- **Alternatives:** Zoom, Google Meet, meeting in person.
+- **Why Discord calls are the best choice:** Discord is good for meetings and screen sharing because we can keep a permanent voice channel that anyone joins in one click, share their screen in HD to walk through code or the running app, and have the text chat beside the call for pasting links, with no meeting links or accounts to set up each week.
 
 
 Each component has exactly one owner. Owning a component means being responsible for writing it and making sure it is functional and correct.
