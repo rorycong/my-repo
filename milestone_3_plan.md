@@ -30,4 +30,5 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 - **Why Instagram calls are the best choice:** They start directly from our group chat, so there are no links or schedules to set up. When we need to walk through code and share a screen, we will use Zoom or Discord, which handle screen sharing better.
 ## Who will own component in your architecture?
 ## What is your timeline?
+Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints. Our own target dates are set a day or more before each course deadline to leave time for review.
 ## How will you verify you met your requirements?
