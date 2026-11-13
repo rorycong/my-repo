@@ -29,6 +29,74 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 - **Alternatives:** Zoom, Google Meet, Discord, meeting in person.
 - **Why Instagram calls are the best choice:** They start directly from our group chat, so there are no links or schedules to set up. When we need to walk through code and share a screen, we will use Zoom or Discord, which handle screen sharing better.
 ## Who will own component in your architecture?
+## 3. Who owns each component?
+
+Each component has exactly one owner. Owning a component means being responsible for writing it and making sure it is functional and correct.
+| Component | Layer | Where it runs | Owner |
+|-----------|-------|---------------|-------|
+| Credentials | Model | Shared (client and server) | Rory |
+| GroupAccess | Model | Shared (client and server) | Rory |
+| Result | Model | Shared (client and server) | Rory |
+| NewBill | Model | Shared (client and server) | Tyler |
+| GroupSummary | Model | Shared (client and server) | Garvit |
+| Member | Model | Shared (client and server) | Eason |
+| BillShare | Model | Shared (client and server) | Tyler |
+| Bill | Model | Shared (client and server) | Tyler |
+| GroupSnapshot | Model | Shared (client and server) | Eason |
+| InputValidator | Model | Shared (client and server) | Garvit |
+| Formatting | Model | Shared (client and server) | Nik |
+| FailureReasons | Model | Shared (client and server) | Eason |
+| User | Model | Server only | Nik |
+| GroupMember | Model | Server only | Nik |
+| Group | Model | Server only | Nik |
+| UserRepository | Model | Server only | Nik |
+| GroupRepository | Model | Server only | Nik |
+| SplitCalculator | Model | Server only | Nik |
+| GroupCodeGenerator | Model | Server only | Nik |
+| TokenGenerator | Model | Server only | Nik |
+| SessionModel | Model | Client only | Rory |
+| GroupListModel | Model | Client only | Nik |
+| GroupModel | Model | Client only | Eason |
+| ConnectionModel | Model | Client only | Rory |
+| BillFormModel | Model | Client only | Tyler |
+| OutstandingModel | Model | Client only | Tyler |
+| AuthGuard | Controller | Server only | Nik |
+| GroupLockManager | Controller | Server only | Nik |
+| UserApiController | Controller | Server only | Rory |
+| GroupApiController | Controller | Server only | Garvit |
+| BillApiController | Controller | Server only | Tyler |
+| ServerConnection | Controller | Client only | Rory |
+| AppController | Controller | Client only | Eason |
+| UsernameController | Controller | Client only | Rory |
+| HomeController | Controller | Client only | Garvit |
+| GroupAdminController | Controller | Client only | Garvit |
+| BillActionController | Controller | Client only | Tyler |
+| SyncController | Controller | Client only | Eason |
+| UsernameView | View | Client only | Rory |
+| HomeView | View | Client only | Garvit |
+| CreateGroupView | View | Client only | Tyler |
+| JoinGroupView | View | Client only | Rory |
+| GroupCodePromptView | View | Client only | Garvit |
+| GroupView | View | Client only | Eason |
+| MemberListView | View | Client only | Eason |
+| BillListView | View | Client only | Tyler |
+| BillDetailsView | View | Client only | Eason |
+| CreateBillView | View | Client only | Tyler |
+| ConnectionBannerView | View | Client only | Nik |
+| ConfirmDialogView | View | Client only | Tyler |
+| ErrorMessageView | View | Client only | Rory |
+
+### Summary by person
+
+| Owner | Components | Count |
+|-------|------------|-------|
+| Nik | GroupRepository, UserRepository, Group, SplitCalculator, GroupLockManager, AuthGuard, TokenGenerator, GroupCodeGenerator, Formatting, ConnectionBannerView, GroupListModel, User, GroupMember | 13 |
+| Rory | ServerConnection, SessionModel, UsernameView, UserApiController, UsernameController, ConnectionModel, ErrorMessageView, JoinGroupView, Credentials, GroupAccess, Result | 11 |
+| Garvit | GroupApiController, InputValidator, HomeController, HomeView, GroupAdminController, GroupCodePromptView, GroupSummary | 7 |
+| Tyler | BillApiController, BillFormModel, BillActionController, CreateBillView, BillListView, OutstandingModel, ConfirmDialogView, CreateGroupView, NewBill, BillShare, Bill | 11 |
+| Eason | SyncController, GroupView, BillDetailsView, AppController, GroupModel, MemberListView, Member, GroupSnapshot, FailureReasons | 9 |
+
+Two additional source files that are not in the architecture document, `ServerMain` and `ClientMain` (the programs that start the server and the client and connect everything), are owned by Rory.
 ## What is your timeline?
 Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints. Our own target dates are set a day or more before each course deadline to leave time for review.
 
