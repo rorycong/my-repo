@@ -374,4 +374,3 @@ If time runs short, money, splitting, and permissions (SPL, BIL, PAY, CAN, OWN, 
 - **Different person checks each piece:** authors test what they already know works.
 - **Tests on every build and commit, review before merge:** a problem caught seconds after it's written is far cheaper than one found on Nov 24, and review stops one person's mistake from breaking everyone's work.
 - **Dates:** server reviews wait for Nov 20 (server complete); full scripts wait for Nov 24 (client connected Nov 22), leaving Nov 24–26 for fixes.
-- **Stating what we skip:** better to say plainly than to pretend we check it.
