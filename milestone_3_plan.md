@@ -36,6 +36,8 @@ Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our c
 
 Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints.
 
+This is our tentative deadline schedule leading up to the 1.o release of our project. 
+
 | Deadline | Milestone / Goal |
 |----------|------------------|
 | Fri, Nov 13 | **Milestone 3: Plan** submitted on the `milestone-3` branch |
