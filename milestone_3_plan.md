@@ -32,8 +32,6 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 ## What is your timeline?
 Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints. Our own target dates are set a day or more before each course deadline to leave time for review.
 
-Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints.
-
 This is our tentative deadline schedule leading up to the 1.0 release of our project. 
 
 | Deadline | Milestone / Goal |
