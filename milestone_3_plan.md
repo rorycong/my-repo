@@ -12,7 +12,7 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 
 
 ### Team chat: Instagram group chat
-- **Alternatives:** Discord, Slack, Microsoft Teams, WhatsApp, email.
+- **Alternatives:** Discord, Microsoft Teams
 - **Why Instagram is the best choice:** Every team member already has Instagram and checks it daily, so messages are seen quickly and nobody has to install or sign up for anything new. Discord and Slack organize conversations better with channels and searchable history, but a new app risks teammates forgetting to check it. Email is too slow for day-to-day coordination.
 - **Trade-off and mitigation:** Older messages get buried in a long chat. We will pin the GitHub repository link and meeting times, and post important decisions as short one-line messages.
 
@@ -31,8 +31,6 @@ We will have a team meeting once a week, typically on Wednesdays, to review prog
 ## Who will own component in your architecture?
 ## What is your timeline?
 Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints. Our own target dates are set a day or more before each course deadline to leave time for review.
-
-## 4. What is our timeline?
 
 Our team meets every Wednesday (Nov 18 and Nov 25), and those meetings are our checkpoints.
 
