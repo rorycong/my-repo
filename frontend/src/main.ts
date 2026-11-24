@@ -762,9 +762,7 @@ submitCreateBillBtn.addEventListener('click', async () => {
     const mem = inp.getAttribute('data-member');
     const w = parseWeightHundredths(inp.value);
     if (mem && w !== null) {
-      // In the server model: weightsHundredths sums to 10000 (100.00%)
-      // From our UI inputs summing to 100 (1.00), multiply by 100
-      weights[mem] = w * 100;
+      weights[mem] = w;
     }
   });
 
