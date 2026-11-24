@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Expense Splitter (IOU)</title>
+  <script type="module" crossorigin src="/assets/index-CYtkNeNn.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BRh1H0su.css">
+</head>
+<body>
+  <!-- Connection Banner -->
+  <div id="connection-banner" class="banner hidden">
+    <span id="connection-banner-text">Connecting to server...</span>
+  </div>
+
+  <!-- Dismissible Error Notification -->
+  <div id="error-dialog" class="notification hidden">
+    <span id="error-message-text"></span>
+    <button id="error-dismiss-btn" class="btn btn-secondary">Dismiss</button>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="confirm-modal-title">Confirm</h3>
+      <p id="confirm-modal-message">Are you sure?</p>
+      <div class="modal-actions">
+        <button id="confirm-cancel-btn" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-ok-btn" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Create Username Screen (USR-1, USR-2) -->
+  <section id="screen-username" class="screen">
+    <div class="card form-card">
+      <h2>Create Username</h2>
+      <p id="username-notice" class="notice hidden"></p>
+      <div class="form-group">
+        <label for="username-input">Username</label>
+        <input type="text" id="username-input" placeholder="e.g. Alice_1" maxlength="20">
+        <small class="hint">3 to 20 characters: letters, numbers, underscores only.</small>
+      </div>
+      <div class="form-group">
+        <label for="server-address-input">Server Address</label>
+        <input type="text" id="server-address-input" value="http://localhost:8080">
+      </div>
+      <button id="create-username-btn" class="btn btn-primary" disabled>Create Username</button>
+    </div>
+  </section>
+
+  <!-- 2. Home Screen (GEN-6) -->
+  <section id="screen-home" class="screen hidden">
+    <header class="home-header">
+      <div>
+        <h1>Splitter</h1>
+        <p class="subtitle">Logged in as <strong id="current-username-display"></strong></p>
+      </div>
+      <div class="header-actions">
+        <button id="open-create-group-btn" class="btn btn-primary">Create Group</button>
+        <button id="open-join-group-btn" class="btn btn-secondary">Join Group</button>
+      </div>
+    </header>
+
+    <div class="card">
+      <h3>Your Groups</h3>
+      <div id="groups-list" class="list-group">
+        <p id="no-groups-msg" class="empty-state">No groups yet</p>
+      </div>
+    </div>
+
+    <!-- Create Group Modal/Drawer -->
+    <div id="create-group-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Create New Group</h3>
+        <div class="form-group">
+          <label for="new-group-name">Group Name</label>
+          <input type="text" id="new-group-name" placeholder="e.g. Ski Trip">
+        </div>
+        <div class="form-group">
+          <label for="creator-member-name">Your Display Name in Group</label>
+          <input type="text" id="creator-member-name" placeholder="e.g. Alice">
+        </div>
+        <div class="modal-actions">
+          <button id="create-group-cancel-btn" class="btn btn-secondary">Cancel</button>
+          <button id="create-group-submit-btn" class="btn btn-primary">Create Group</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Join Group Modal/Drawer -->
+    <div id="join-group-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Join Group with Code</h3>
+        <div class="form-group">
+          <label for="join-group-code">Group Code (6 characters)</label>
+          <input type="text" id="join-group-code" placeholder="e.g. 7K2M9P" maxlength="6">
+        </div>
+        <div class="form-group">
+          <label for="join-member-name">Your Display Name in Group</label>
+          <input type="text" id="join-member-name" placeholder="e.g. Bob">
+        </div>
+        <div class="modal-actions">
+          <button id="join-group-cancel-btn" class="btn btn-secondary">Cancel</button>
+          <button id="join-group-submit-btn" class="btn btn-primary" disabled>Join Group</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt Group Code Modal -->
+    <div id="prompt-code-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Enter Group Code</h3>
+        <p>The code for this group is not saved or has changed.</p>
+        <div class="form-group">
+          <label for="prompt-group-code">Group Code</label>
+          <input type="text" id="prompt-group-code" maxlength="6">
+        </div>
+        <div class="modal-actions">
+          <button id="prompt-code-cancel-btn" class="btn btn-secondary">Cancel</button>
+          <button id="prompt-code-submit-btn" class="btn btn-primary">Open Group</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Group Screen (GEN-7, GEN-8) -->
+  <section id="screen-group" class="screen hidden">
+    <!-- Header with controls (GEN-8) -->
+    <header class="group-header">
+      <div class="group-title-row">
+        <h2 id="group-title">Group Name</h2>
+        <span id="group-owner-badge" class="badge hidden">Owner</span>
+      </div>
+      <div class="group-actions">
+        <button id="group-back-btn" class="btn btn-secondary">Back to Home</button>
+        <button id="group-leave-btn" class="btn btn-secondary">Leave Group</button>
+        
+        <!-- Owner-only controls -->
+        <span id="owner-controls" class="owner-actions hidden">
+          <button id="group-rename-btn" class="btn btn-secondary">Rename Group</button>
+          <button id="group-show-code-btn" class="btn btn-secondary">Show Group Code</button>
+          <button id="group-generate-code-btn" class="btn btn-secondary">Generate New Code</button>
+          <button id="group-cancel-all-bills-btn" class="btn btn-danger">Cancel All Bills</button>
+        </span>
+      </div>
+      <div id="group-code-display" class="group-code-banner hidden">
+        Group Code: <strong id="group-code-text"></strong>
+      </div>
+    </header>
+
+    <div class="group-body-grid">
+      <!-- Area 1: Members Area (GEN-7) -->
+      <section class="card members-card">
+        <h3>Members</h3>
+        <div id="members-list" class="members-container">
+          <!-- Member rows rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Area 2: Bills Area & Details (GEN-7) -->
+      <section class="card bills-card">
+        <h3>Bills</h3>
+        <div id="bills-scroll-list" class="bills-container">
+          <p id="no-bills-msg" class="empty-state">No bills yet</p>
+        </div>
+
+        <!-- Selected Bill Details View -->
+        <div id="bill-details-container" class="bill-details-section hidden">
+          <hr>
+          <div class="details-header">
+            <h4 id="detail-bill-desc">Bill Description</h4>
+            <span id="detail-bill-status" class="badge">Open</span>
+          </div>
+          <p>Total: <strong id="detail-bill-total">$0.00</strong></p>
+          <div class="form-group inline-form">
+            <label for="detail-date-input">Suggested Pay-Back Date:</label>
+            <input type="date" id="detail-date-input">
+            <button id="detail-change-date-btn" class="btn btn-secondary btn-sm">Update Date</button>
+          </div>
+          <table class="shares-table">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Weight</th>
+                <th>Share</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="detail-shares-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+          <div class="details-footer">
+            <button id="detail-cancel-bill-btn" class="btn btn-danger btn-sm">Cancel Bill</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Area 3: Create Bill Form (GEN-7, BIL 1-7) -->
+      <section class="card create-bill-card">
+        <h3>Create Bill</h3>
+        <form id="create-bill-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="bill-description-input">Description</label>
+            <input type="text" id="bill-description-input" placeholder="e.g. Pizza dinner">
+          </div>
+          <div class="form-group">
+            <label for="bill-amount-input">Amount ($)</label>
+            <input type="text" id="bill-amount-input" placeholder="e.g. 10.00">
+          </div>
+          <div class="form-group">
+            <label for="bill-date-input">Suggested Date (optional)</label>
+            <input type="date" id="bill-date-input">
+          </div>
+
+          <div class="weights-header">
+            <label>Member Weights (Sum must equal 1.00)</label>
+            <button type="button" id="split-equally-btn" class="btn btn-secondary btn-sm">Split Equally</button>
+          </div>
+          <div id="weight-rows-container" class="weight-rows">
+            <!-- Dynamically populated weight row per current member -->
+          </div>
+          <div class="weight-sum-indicator">
+            Total Weight: <span id="weight-sum-display">0.00</span>
+          </div>
+
+          <button type="button" id="submit-create-bill-btn" class="btn btn-primary" disabled>Create Bill</button>
+        </form>
+      </section>
+    </div>
+  </section>
+
+</body>
+</html>

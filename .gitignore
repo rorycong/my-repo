@@ -1,0 +1,13 @@
+frontend/node_modules/
+frontend/dist/
+bin/
+build/
+.gradle/
+*.class
+*.tmp
+*.db
+session.cfg
+data/
+.idea/
+*.iml
+.DS_Store

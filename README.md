@@ -50,3 +50,38 @@ Here is an abstract visualization of the platform:
 
 <img width="522" height="839" alt="IMG_0047" src="https://github.com/user-attachments/assets/6792658d-8362-4bfc-9c23-b168b0caf837" />
 <img width="522" height="839" alt="IMG_0048" src="https://github.com/user-attachments/assets/16879be7-1e47-4a80-9f08-0b78531e0829" />
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Java 21 or newer (JDK 21+)
+- Optional: Gradle 8+
+
+### Running the Test Suite
+You can run the full test suite using Gradle:
+```bash
+gradle test
+```
+Or with standard `javac`/`java` using the provided test runner:
+```bash
+# Windows PowerShell
+javac -d bin/main (Get-ChildItem -Path src/main/java -Recurse -Filter "*.java").FullName
+javac -cp "bin/main;lib/*" -d bin/test (Get-ChildItem -Path src/test/java -Recurse -Filter "*.java").FullName
+java -cp "bin/main;bin/test;lib/*" splitter.TestRunner
+```
+
+### Running the Server & Web Application
+To start the backend HTTP server and serve the responsive web client on port 8080:
+```bash
+# Using standard Java
+java -cp "bin/main" splitter.server.ServerMain 8080
+```
+Then open [http://localhost:8080](http://localhost:8080) in any web browser (desktop, tablet, or phone).
+
+### Running the Desktop Java Client
+```bash
+java -cp "bin/main" splitter.client.ClientMain
+```
+
