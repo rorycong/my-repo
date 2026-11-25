@@ -80,12 +80,15 @@ const screenUsername = document.getElementById('screen-username') as HTMLElement
 const usernameInput = document.getElementById('username-input') as HTMLInputElement;
 const serverAddrInput = document.getElementById('server-address-input') as HTMLInputElement;
 const createUsernameBtn = document.getElementById('create-username-btn') as HTMLButtonElement;
+const savedAccountsSection = document.getElementById('saved-accounts-section') as HTMLDivElement;
+const savedAccountsList = document.getElementById('saved-accounts-list') as HTMLDivElement;
 
 const screenHome = document.getElementById('screen-home') as HTMLElement;
 const currentUsernameDisplay = document.getElementById('current-username-display') as HTMLElement;
 const groupsList = document.getElementById('groups-list') as HTMLDivElement;
 const openCreateGroupBtn = document.getElementById('open-create-group-btn') as HTMLButtonElement;
 const openJoinGroupBtn = document.getElementById('open-join-group-btn') as HTMLButtonElement;
+const signOutBtn = document.getElementById('sign-out-btn') as HTMLButtonElement;
 
 const createGroupModal = document.getElementById('create-group-modal') as HTMLDivElement;
 const newGroupName = document.getElementById('new-group-name') as HTMLInputElement;
@@ -185,6 +188,47 @@ confirmCancel.addEventListener('click', () => {
   pendingConfirmAction = null;
 });
 
+// ── Saved Accounts Helpers ───────────────────────────────────────────────────
+function getSavedAccounts(): Record<string, string> {
+  try {
+    return JSON.parse(localStorage.getItem('splitter_saved_accounts') || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function saveAccount(username: string, loginToken: string): void {
+  const accs = getSavedAccounts();
+  accs[username] = loginToken;
+  localStorage.setItem('splitter_saved_accounts', JSON.stringify(accs));
+}
+
+function renderSavedAccounts(): void {
+  if (!savedAccountsSection || !savedAccountsList) return;
+  const accounts = getSavedAccounts();
+  const entries = Object.entries(accounts);
+  if (entries.length === 0) {
+    savedAccountsSection.classList.add('hidden');
+    return;
+  }
+  savedAccountsSection.classList.remove('hidden');
+  savedAccountsList.innerHTML = '';
+  entries.forEach(([u, tok]) => {
+    const chip = document.createElement('button');
+    chip.className = 'btn btn-secondary btn-sm';
+    chip.type = 'button';
+    chip.innerHTML = `👤 <strong>${escapeHtml(u)}</strong>`;
+    chip.addEventListener('click', () => {
+      state.username = u;
+      state.loginToken = tok;
+      localStorage.setItem('splitter_username', u);
+      localStorage.setItem('splitter_token', tok);
+      showScreen('home');
+    });
+    savedAccountsList.appendChild(chip);
+  });
+}
+
 // ── Screen Router ────────────────────────────────────────────────────────────
 function showScreen(screen: 'username' | 'home' | 'group') {
   state.currentScreen = screen;
@@ -199,6 +243,7 @@ function showScreen(screen: 'username' | 'home' | 'group') {
 
   if (screen === 'username') {
     screenUsername.classList.remove('hidden');
+    renderSavedAccounts();
   } else if (screen === 'home') {
     screenHome.classList.remove('hidden');
     currentUsernameDisplay.textContent = state.username || '';
@@ -240,10 +285,24 @@ createUsernameBtn.addEventListener('click', async () => {
     state.loginToken = res.data.loginToken;
     localStorage.setItem('splitter_username', state.username);
     localStorage.setItem('splitter_token', state.loginToken);
+    saveAccount(state.username, state.loginToken);
     showScreen('home');
   } else {
     showError(res.failureReason);
   }
+});
+
+// ── Sign Out ─────────────────────────────────────────────────────────────────
+signOutBtn.addEventListener('click', () => {
+  localStorage.removeItem('splitter_username');
+  localStorage.removeItem('splitter_token');
+  state.username = null;
+  state.loginToken = null;
+  state.groups = [];
+  state.currentGroup = null;
+  state.selectedBillId = null;
+  usernameInput.value = '';
+  showScreen('username');
 });
 
 // ── Screen 2: Home / Group List ──────────────────────────────────────────────
@@ -796,6 +855,7 @@ submitCreateBillBtn.addEventListener('click', async () => {
 
 // ── Application Boot ──────────────────────────────────────────────────────────
 if (state.username && state.loginToken) {
+  saveAccount(state.username, state.loginToken);
   showScreen('home');
 } else {
   showScreen('username');

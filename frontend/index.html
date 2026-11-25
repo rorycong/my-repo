@@ -45,6 +45,13 @@
         <input type="text" id="server-address-input" placeholder="Auto-detected (current server)">
       </div>
       <button id="create-username-btn" class="btn btn-primary" disabled>Create Username</button>
+
+      <!-- Saved Accounts / Switch User -->
+      <div id="saved-accounts-section" class="saved-accounts-box hidden">
+        <hr style="margin: 1.25rem 0 0.75rem; border: 0; border-top: 1px solid var(--border-color);">
+        <label style="display:block; font-size:0.8rem; color:var(--muted-text); margin-bottom:0.5rem; font-weight:600;">Or switch to saved account:</label>
+        <div id="saved-accounts-list" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
+      </div>
     </div>
   </section>
 
@@ -58,6 +65,7 @@
       <div class="header-actions">
         <button id="open-create-group-btn" class="btn btn-primary">Create Group</button>
         <button id="open-join-group-btn" class="btn btn-secondary">Join Group</button>
+        <button id="sign-out-btn" class="btn btn-secondary">Sign Out</button>
       </div>
     </header>
 
