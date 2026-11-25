@@ -28,10 +28,16 @@ import {
 } from './format';
 
 // ── Application State ──────────────────────────────────────────────────────────
+const savedServer = localStorage.getItem('splitter_server');
+const defaultServer =
+  savedServer && (!savedServer.includes('localhost') || window.location.hostname === 'localhost')
+    ? savedServer
+    : window.location.origin;
+
 const state: AppState = {
   username: localStorage.getItem('splitter_username') || null,
   loginToken: localStorage.getItem('splitter_token') || null,
-  serverAddress: localStorage.getItem('splitter_server') || window.location.origin,
+  serverAddress: defaultServer,
   savedCodes: JSON.parse(localStorage.getItem('splitter_codes') || '{}'),
   connected: true,
   groups: [],
@@ -216,17 +222,17 @@ function updateControlStates() {
 }
 
 // ── Screen 1: Username / Auth ─────────────────────────────────────────────────
+serverAddrInput.value = state.serverAddress;
+
 usernameInput.addEventListener('input', () => {
   createUsernameBtn.disabled = !state.connected || !isValidUsername(usernameInput.value);
 });
 
 createUsernameBtn.addEventListener('click', async () => {
   const username = usernameInput.value.trim();
-  const serverAddr = serverAddrInput.value.trim();
-  if (serverAddr) {
-    state.serverAddress = serverAddr;
-    localStorage.setItem('splitter_server', serverAddr);
-  }
+  const serverAddr = serverAddrInput.value.trim() || window.location.origin;
+  state.serverAddress = serverAddr;
+  localStorage.setItem('splitter_server', serverAddr);
 
   const res = await apiCreateUser(username);
   if (res.success && res.data) {
